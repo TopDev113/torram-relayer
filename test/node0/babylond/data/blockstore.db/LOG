@@ -30,3 +30,13 @@
 12:36:42.944340 db@open done T·256.717268ms
 12:37:25.358714 db@close closing
 12:37:25.365821 db@close done T·7.101603ms
+=============== Nov 26, 2024 (GMT) ===============
+12:37:32.278256 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+12:37:32.280490 version@stat F·[2] S·2MiB[2MiB] Sc·[0.50]
+12:37:32.280705 db@open opening
+12:37:32.281235 journal@recovery F·1
+12:37:32.281624 journal@recovery recovering @6
+12:37:32.287132 memdb@flush created L0@8 N·56 S·8KiB "BH:..bf2,v16182":"blo..ore,v16158"
+12:37:32.287692 version@stat F·[3] S·2MiB[2MiB] Sc·[0.75]
+12:37:32.299018 db@janitor F·5 G·0
+12:37:32.299108 db@open done T·18.333206ms

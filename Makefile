@@ -4,11 +4,13 @@ MOCKGEN_REPO=github.com/golang/mock/mockgen
 MOCKGEN_VERSION=v1.6.0
 MOCKGEN_CMD=go run ${MOCKGEN_REPO}@${MOCKGEN_VERSION}
 BUILDDIR ?= $(CURDIR)/build
+
+#### PATH customization ####
 BABYLON_PATH = /mnt/e/09_Product/vigilante-main/babylon
 VIGILANTE_PATH = ./vigilant
 TESTNET_PATH = ./test
 BABYLON_PKG := github.com/babylonlabs-io/babylon/cmd/babylond
-
+####
 GO_BIN := ${GOPATH}/bin
 
 ldflags := $(LDFLAGS)
@@ -82,6 +84,7 @@ proto-gen:
 
 .PHONY: proto-gen
 
+############### our customized command ############
 babylond-make:
 	$(BABYLON_PATH)/build/babylond testnet \
     --v                     1 \
@@ -131,7 +134,6 @@ vigilante-reporter:
          --config ./vigilante.yml \
          --babylon-key-dir $(TESTNET_PATH)/node0/babylond
 
-vigilante-submitter:
 	go run ./cmd/vigilante/main.go submitter \
          --config ./vigilante.yml
 
@@ -143,6 +145,11 @@ vigilante-monitor:
 vigilante-tracker:
 	go run ./cmd/vigilante/main.go bstracker \
          --config ./vigilante.yml
+
+
+############	Torram		############
+
+
 
 ###############################################################################
 ###                                Gosec                                    ###

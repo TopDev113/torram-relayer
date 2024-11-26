@@ -19,3 +19,13 @@
 10:53:35.292863 version@stat F·[2] S·974KiB[974KiB] Sc·[0.50]
 10:53:35.294469 memdb@flush committed F·1 T·72.210339ms
 10:53:35.295922 journal@remove removed @3
+=============== Nov 26, 2024 (GMT) ===============
+12:36:43.012609 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+12:36:43.014840 version@stat F·[2] S·974KiB[974KiB] Sc·[0.50]
+12:36:43.015069 db@open opening
+12:36:43.015757 journal@recovery F·1
+12:36:43.015910 journal@recovery recovering @5
+12:36:43.087205 memdb@flush created L0@7 N·41352 S·515KiB "blo..\xe0Q\xfe,v84825":"\xebޔ..\xee\x82T,v84828"
+12:36:43.088452 version@stat F·[3] S·1MiB[1MiB] Sc·[0.75]
+12:36:43.102446 db@janitor F·5 G·0
+12:36:43.102594 db@open done T·87.437614ms

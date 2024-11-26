@@ -102,20 +102,20 @@ func GetSubmitterCmd() *cobra.Command {
 			metrics.Start(addr, submitterMetrics.Registry)
 
 			// SIGINT handling stuff
-			addInterruptHandler(func() {
-				// TODO: Does this need to wait for the grpc server to finish up any requests?
-				rootLogger.Info("Stopping RPC server...")
-				server.Stop()
-				rootLogger.Info("RPC server shutdown")
-			})
-			addInterruptHandler(func() {
-				rootLogger.Info("Stopping submitter...")
-				vigilantSubmitter.Stop()
-				rootLogger.Info("Submitter shutdown")
-			})
+			// addInterruptHandler(func() {
+			// 	// TODO: Does this need to wait for the grpc server to finish up any requests?
+			// 	rootLogger.Info("Stopping RPC server...")
+			// 	server.Stop()
+			// 	rootLogger.Info("RPC server shutdown")
+			// })
+			// addInterruptHandler(func() {
+			// 	rootLogger.Info("Stopping submitter...")
+			// 	vigilantSubmitter.Stop()
+			// 	rootLogger.Info("Submitter shutdown")
+			// })
 
-			<-interruptHandlersDone
-			rootLogger.Info("Shutdown complete")
+			// <-interruptHandlersDone
+			// rootLogger.Info("Shutdown complete")
 		},
 	}
 	cmd.Flags().StringVar(&cfgFile, "config", config.DefaultConfigFile(), "config file")

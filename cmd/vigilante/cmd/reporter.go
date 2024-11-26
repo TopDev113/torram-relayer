@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+
 	bbnclient "github.com/babylonlabs-io/babylon/client/client"
 	"github.com/spf13/cobra"
 
@@ -98,26 +99,26 @@ func GetReporterCmd() *cobra.Command {
 			metrics.Start(addr, reporterMetrics.Registry)
 
 			// SIGINT handling stuff
-			addInterruptHandler(func() {
-				// TODO: Does this need to wait for the grpc server to finish up any requests?
-				rootLogger.Info("Stopping RPC server...")
-				server.Stop()
-				rootLogger.Info("RPC server shutdown")
-			})
-			addInterruptHandler(func() {
-				rootLogger.Info("Stopping reporter...")
-				vigilantReporter.Stop()
-				rootLogger.Info("Reporter shutdown")
-			})
-			addInterruptHandler(func() {
-				rootLogger.Info("Stopping BTC client...")
-				btcClient.Stop()
-				btcClient.WaitForShutdown()
-				rootLogger.Info("BTC client shutdown")
-			})
+			// addInterruptHandler(func() {
+			// 	// TODO: Does this need to wait for the grpc server to finish up any requests?
+			// 	rootLogger.Info("Stopping RPC server...")
+			// 	server.Stop()
+			// 	rootLogger.Info("RPC server shutdown")
+			// })
+			// addInterruptHandler(func() {
+			// 	rootLogger.Info("Stopping reporter...")
+			// 	vigilantReporter.Stop()
+			// 	rootLogger.Info("Reporter shutdown")
+			// })
+			// addInterruptHandler(func() {
+			// 	rootLogger.Info("Stopping BTC client...")
+			// 	btcClient.Stop()
+			// 	btcClient.WaitForShutdown()
+			// 	rootLogger.Info("BTC client shutdown")
+			// })
 
-			<-interruptHandlersDone
-			rootLogger.Info("Shutdown complete")
+			// <-interruptHandlersDone
+			// rootLogger.Info("Shutdown complete")
 		},
 	}
 	cmd.Flags().StringVar(&babylonKeyDir, "babylon-key-dir", "", "Directory of the Babylon key")

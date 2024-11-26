@@ -1,0 +1,41 @@
+=============== Nov 26, 2024 (GMT) ===============
+07:10:42.697748 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+07:10:42.705179 db@open opening
+07:10:42.706684 version@stat F·[] S·0B[] Sc·[]
+07:10:42.709107 db@janitor F·2 G·0
+07:10:42.709550 db@open done T·4.283845ms
+07:40:47.638395 db@close closing
+07:40:47.639143 db@close done T·744.954µs
+=============== Nov 26, 2024 (GMT) ===============
+07:40:55.095739 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+07:40:55.098534 version@stat F·[] S·0B[] Sc·[]
+07:40:55.098825 db@open opening
+07:40:55.099488 journal@recovery F·1
+07:40:55.099699 journal@recovery recovering @1
+07:40:55.140498 memdb@flush created L0@2 N·1841 S·424KiB "abc..y:1,v7":"val..:99,v489"
+07:40:55.141149 version@stat F·[1] S·424KiB[424KiB] Sc·[0.25]
+07:40:55.149975 db@janitor F·3 G·0
+07:40:55.150069 db@open done T·51.1455ms
+10:24:51.814598 memdb@flush N·4053 S·3MiB
+10:24:51.907018 memdb@flush created L0@6 N·4053 S·932KiB "abc..000,v5004":"val..999,v4991"
+10:24:51.907167 version@stat F·[2] S·1MiB[1MiB] Sc·[0.50]
+10:24:51.908514 memdb@flush committed F·1 T·93.69698ms
+10:24:51.909403 journal@remove removed @3
+10:26:45.347938 table@compaction L0·2 -> L1·0 S·1MiB Q·6008
+10:26:45.483346 table@build created L1@7 N·3539 S·585KiB "abc..y:1,v7":"val..999,v4991"
+10:26:45.483454 version@stat F·[0 1] S·585KiB[0B 585KiB] Sc·[0.00 0.01]
+10:26:45.484844 table@compaction committed F-1 S-772KiB Ke·0 D·2355 T·136.699523ms
+10:26:45.485544 table@remove removed @6
+11:31:21.643406 memdb@flush N·4053 S·3MiB
+11:31:21.723146 memdb@flush created L0@9 N·4053 S·932KiB "abc..179,v5899":"val..990,v9946"
+11:31:21.723246 version@stat F·[1 1] S·1MiB[932KiB 585KiB] Sc·[0.25 0.01]
+11:31:21.724664 memdb@flush committed F·1 T·80.941647ms
+11:31:21.725370 journal@remove removed @5
+11:33:24.433599 table@compaction L0·1 -> L1·1 S·1MiB Q·10073
+11:33:24.610136 table@build created L1@10 N·5971 S·984KiB "abc..y:1,v7":"val..999,v4991"
+11:33:24.610268 version@stat F·[0 1] S·984KiB[0B 984KiB] Sc·[0.00 0.01]
+11:33:24.611965 table@compaction committed F-1 S-533KiB Ke·0 D·1621 T·178.257257ms
+11:33:24.612753 table@remove removed @9
+11:33:24.613485 table@remove removed @7
+12:11:49.119061 db@close closing
+12:11:49.120959 db@close done T·1.889972ms

@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+
 	bbnqccfg "github.com/babylonlabs-io/babylon/client/config"
 	bbnqc "github.com/babylonlabs-io/babylon/client/query"
 	"github.com/spf13/cobra"
@@ -114,21 +115,21 @@ func GetMonitorCmd() *cobra.Command {
 			addr := fmt.Sprintf("%s:%d", cfg.Metrics.Host, cfg.Metrics.ServerPort)
 			metrics.Start(addr, monitorMetrics.Registry)
 
-			// SIGINT handling stuff
-			addInterruptHandler(func() {
-				// TODO: Does this need to wait for the grpc server to finish up any requests?
-				rootLogger.Info("Stopping RPC server...")
-				server.Stop()
-				rootLogger.Info("RPC server shutdown")
-			})
-			addInterruptHandler(func() {
-				rootLogger.Info("Stopping monitor...")
-				vigilanteMonitor.Stop()
-				rootLogger.Info("Monitor shutdown")
-			})
+			// // SIGINT handling stuff
+			// addInterruptHandler(func() {
+			// 	// TODO: Does this need to wait for the grpc server to finish up any requests?
+			// 	rootLogger.Info("Stopping RPC server...")
+			// 	server.Stop()
+			// 	rootLogger.Info("RPC server shutdown")
+			// })
+			// addInterruptHandler(func() {
+			// 	rootLogger.Info("Stopping monitor...")
+			// 	vigilanteMonitor.Stop()
+			// 	rootLogger.Info("Monitor shutdown")
+			// })
 
-			<-interruptHandlersDone
-			rootLogger.Info("Shutdown complete")
+			// <-interruptHandlersDone
+			// rootLogger.Info("Shutdown complete")
 		},
 	}
 	cmd.Flags().StringVar(&genesisFile, genesisFileNameFlag, GenesisFileNameDefault, "genesis file")

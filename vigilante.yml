@@ -5,23 +5,25 @@ common:
   max-retry-sleep-time: 5m
 btc:
   no-client-tls: false # use true for bitcoind as it does not support tls
-  ca-file: $TESTNET_PATH/bitcoin/rpc.cert
-  endpoint: localhost:18556 # use port 18443 for bitcoind regtest
+  ca-file: bitcoin/rpc.cert
+  endpoint: localhost:18443 # use port 18443 for bitcoind regtest
   estimate-mode: CONSERVATIVE # only needed by bitcoind
   tx-fee-max: 20000 # maximum tx fee, 20,000sat/kvb
   tx-fee-min: 1000 # minimum tx fee, 1,000sat/kvb
   default-fee: 1000 # 1,000sat/kvb
   target-block-num: 2
   wallet-endpoint: localhost:18554
-  wallet-password: walletpass
-  wallet-name: default
+  wallet-password: torram
+  wallet-name: torram
   wallet-lock-time: 10
-  wallet-ca-file: $TESTNET_PATH/bitcoin/rpc-wallet.cert
-  net-params: simnet  # use regtest for bitcoind as it does not support simnet
-  username: rpcuser
-  password: rpcpass
+  wallet-ca-file: bitcoin/rpc-wallet.cert
+  net-params: regtest # use regtest for bitcoind as it does not support simnet
+  username: davis
+  password: aaa
   reconnect-attempts: 3
-  zmq-endpoint: ~  # use tcp://127.0.0.1:29000 if btc-backend is bitcoind
+  zmq-block-endpoint: "tcp://localhost:28332"
+  zmq-tx-endpoint: "tcp://localhost:28333" # Replace with your configured ZMQ transaction endpoint
+  zmq-seq-endpoint: "tcp://localhost:28334" # Sequence endpoint for ZMQ
 babylon:
   key: node0
   chain-id: chain-test
@@ -31,7 +33,7 @@ babylon:
   keyring-backend: test
   gas-adjustment: 1.2
   gas-prices: 2ubbn
-  key-directory: $TESTNET_PATH/node0/babylond
+  key-directory: node0/babylond
   debug: true
   timeout: 20s
   block-timeout: ~
@@ -41,7 +43,7 @@ babylon:
 grpc:
   onetime-tls-key: true
   rpc-key: ""
-  rpc-cert: $TESTNET_PATH/vigilante/rpc.cert
+  rpc-cert: vigilante/rpc.cert
   endpoints:
     - localhost:8080
 grpcweb:
@@ -50,21 +52,21 @@ metrics:
   host: 0.0.0.0
   server-port: 2112
 submitter:
-  netparams: simnet
+  netparams: regtest
   buffer-size: 10
   resubmit-fee-multiplier: 1
   polling-interval-seconds: 60
   resend-interval-seconds: 1800
   dbconfig:
-    dbpath: $TESTNET_PATH/vigilante/
+    dbpath: vigilante/
     dbfilename: submitter.db
     nofreelistsync: true
     autocompact: false
     autocompactminage: 168h
     dbtimeout: 60s
 reporter:
-  netparams: simnet
-  btc_cache_size: 1000
+  netparams: regtest
+  btc_cache_size: 5000
   max_headers_in_msg: 100
 monitor:
   checkpoint-buffer-size: 1000
@@ -75,9 +77,9 @@ monitor:
   max-live-btc-heights: 200
   enable-liveness-checker: true
   enable-slasher: true
-  btcnetparams: simnet
+  btcnetparams: regtest
   dbconfig:
-    dbpath: $TESTNET_PATH/monitor/
+    dbpath: monitor/
     dbfilename: submitter.db
     nofreelistsync: true
     autocompact: false
@@ -89,4 +91,5 @@ btcstaking-tracker:
   check-if-delegation-active-interval: 5m
   retry-submit-unbonding-interval: 1m
   max-jitter-interval: 30s
-  btcnetparams: simnet
+  btcnetparams: regtest
+  max-slashing-concurrency: 5 # Adjust this value based on your requirements

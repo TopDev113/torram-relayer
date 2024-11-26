@@ -4,7 +4,9 @@ MOCKGEN_REPO=github.com/golang/mock/mockgen
 MOCKGEN_VERSION=v1.6.0
 MOCKGEN_CMD=go run ${MOCKGEN_REPO}@${MOCKGEN_VERSION}
 BUILDDIR ?= $(CURDIR)/build
-
+BABYLON_PATH = /mnt/e/09_Product/vigilante-main/babylon
+VIGILANTE_PATH = ./vigilant
+TESTNET_PATH = ./test
 BABYLON_PKG := github.com/babylonlabs-io/babylon/cmd/babylond
 
 GO_BIN := ${GOPATH}/bin
@@ -80,6 +82,67 @@ proto-gen:
 
 .PHONY: proto-gen
 
+babylond-make:
+	$(BABYLON_PATH)/build/babylond testnet \
+    --v                     1 \
+    --output-dir            $(TESTNET_PATH) \
+    --starting-ip-address   192.168.10.2 \
+    --keyring-backend       test \
+    --chain-id              chain-test
+
+babylond-start:
+	$(BABYLON_PATH)/build/babylond start --home $(TESTNET_PATH)/node0/babylond
+	
+bitcoin-start:
+	bitcoind -regtest \
+			-txindex \
+			-rpcuser=davis \
+			-rpcpassword=aaa \
+			-rpcbind=0.0.0.0:18443 \
+			-datadir=/mnt/e/bitcoin-27.0 \
+        	-zmqpubrawblock=tcp://0.0.0.0:28332 \
+    		-zmqpubrawtx=tcp://0.0.0.0:28333 \
+    		-zmqpubsequence=tcp://0.0.0.0:28334
+
+wallet-start:
+	bitcoin-cli -regtest \
+		-rpcuser=davis \
+		-rpcpassword=aaa \
+		-named createwallet \
+		wallet_name="torram" \
+		passphrase="torram" \
+		load_on_startup=true \
+		descriptors=true
+
+btc-create:
+	bitcoin-cli -regtest \
+    -rpcuser=davis \
+    -rpcpassword=aaa \
+    getnewaddress
+
+blocks-create:
+	bitcoin-cli -regtest \
+      -rpcuser=davis\
+      -rpcpassword=aaa \
+      -generate 100
+
+vigilante-reporter:
+	go run ./cmd/vigilante/main.go reporter \
+         --config ./vigilante.yml \
+         --babylon-key-dir $(TESTNET_PATH)/node0/babylond
+
+vigilante-submitter:
+	go run ./cmd/vigilante/main.go submitter \
+         --config ./vigilante.yml
+
+vigilante-monitor:
+	go run ./cmd/vigilante/main.go monitor \
+         --genesis $(TESTNET_PATH)/node0/babylond/config/genesis.json \
+         --config ./vigilante.yml
+
+vigilante-tracker:
+	go run ./cmd/vigilante/main.go bstracker \
+         --config ./vigilante.yml
 
 ###############################################################################
 ###                                Gosec                                    ###

@@ -1,0 +1,14 @@
+{
+  "acc_address": "bbn170uql047hmy37nenww7r9pt6crrkklyxcgqmtt",
+  "address": "1CA41FEF1363C3CEF53C67F6783548CF29D13F88",
+  "pub_key": {
+    "type": "tendermint/PubKeyEd25519",
+    "value": "mFVzDAN/RDDc/euGcHPKlz8i8W2tn81qAWNg4ZoPV3Y="
+  },
+  "priv_key": {
+    "type": "tendermint/PrivKeyEd25519",
+    "value": "tMIqgO5HFUlf68TzM6jYg40YFOmzYlyuLSgO4ihKAmCYVXMMA39EMNz964Zwc8qXPyLxba2fzWoBY2Dhmg9Xdg=="
+  },
+  "bls_pub_key": "lGhOjyT3UGw36chz4xTVpVcvSesDlPozT0MZaVqAX7q8CJFflNCanXhkzZ/qs/vrFsm2X4fBVT3rYKiPjFfJXZvhUrzs+3LYPGCvGJDVwV6dGH97e4twZKmlWnbxm7wU",
+  "bls_priv_key": "Q6o0dGllPzwBBaGohj5JU0cunIaZUJnRVeKQK7Lo1Tg="
+}

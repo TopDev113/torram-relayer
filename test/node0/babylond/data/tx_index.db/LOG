@@ -1,0 +1,21 @@
+=============== Nov 26, 2024 (GMT) ===============
+07:10:42.723903 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+07:10:42.731284 db@open opening
+07:10:42.732457 version@stat F·[] S·0B[] Sc·[]
+07:10:42.734945 db@janitor F·2 G·0
+07:10:42.735062 db@open done T·3.688864ms
+=============== Nov 26, 2024 (GMT) ===============
+07:40:55.152187 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+07:40:55.153898 version@stat F·[] S·0B[] Sc·[]
+07:40:55.154085 db@open opening
+07:40:55.154510 journal@recovery F·1
+07:40:55.154615 journal@recovery recovering @1
+07:40:55.176714 memdb@flush created L0@2 N·19401 S·228KiB "blo..\x01\x81\x85,v2":"blo..o\xd8G,v19363"
+07:40:55.179948 version@stat F·[1] S·228KiB[228KiB] Sc·[0.25]
+07:40:55.190552 db@janitor F·3 G·0
+07:40:55.190655 db@open done T·36.509219ms
+10:53:35.222025 memdb@flush N·61498 S·3MiB
+10:53:35.292694 memdb@flush created L0@6 N·61498 S·746KiB "blo..\x91\xc2E,v21207":"\xf3\a\xc8..\x00B\xb7,v63622"
+10:53:35.292863 version@stat F·[2] S·974KiB[974KiB] Sc·[0.50]
+10:53:35.294469 memdb@flush committed F·1 T·72.210339ms
+10:53:35.295922 journal@remove removed @3

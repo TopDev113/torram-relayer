@@ -113,36 +113,36 @@ func GetBTCStakingTracker() *cobra.Command {
 			metrics.Start(addr, bsMetrics.Registry)
 
 			// SIGINT handling stuff
-			addInterruptHandler(func() {
-				// TODO: Does this need to wait for the grpc server to finish up any requests?
-				rootLogger.Info("Stopping RPC server...")
-				server.Stop()
-				rootLogger.Info("RPC server shutdown")
-			})
-			addInterruptHandler(func() {
-				rootLogger.Info("Stopping unbonding watcher...")
-				if err := bstracker.Stop(); err != nil {
-					panic(fmt.Errorf("failed to stop unbonding watcher: %w", err))
-				}
-				rootLogger.Info("Unbonding watcher shutdown")
-			})
-			addInterruptHandler(func() {
-				rootLogger.Info("Stopping BTC notifier...")
-				if err := bstracker.Stop(); err != nil {
-					panic(fmt.Errorf("failed to stop btc chain notifier: %w", err))
-				}
-				rootLogger.Info("BTC notifier shutdown")
-			})
-			addInterruptHandler(func() {
-				rootLogger.Info("Stopping Babylon client...")
-				if err := bbnClient.Stop(); err != nil {
-					panic(fmt.Errorf("failed to stop Babylon client: %w", err))
-				}
-				rootLogger.Info("Babylon client shutdown")
-			})
+			// addInterruptHandler(func() {
+			// 	// TODO: Does this need to wait for the grpc server to finish up any requests?
+			// 	rootLogger.Info("Stopping RPC server...")
+			// 	server.Stop()
+			// 	rootLogger.Info("RPC server shutdown")
+			// })
+			// addInterruptHandler(func() {
+			// 	rootLogger.Info("Stopping unbonding watcher...")
+			// 	if err := bstracker.Stop(); err != nil {
+			// 		panic(fmt.Errorf("failed to stop unbonding watcher: %w", err))
+			// 	}
+			// 	rootLogger.Info("Unbonding watcher shutdown")
+			// })
+			// addInterruptHandler(func() {
+			// 	rootLogger.Info("Stopping BTC notifier...")
+			// 	if err := bstracker.Stop(); err != nil {
+			// 		panic(fmt.Errorf("failed to stop btc chain notifier: %w", err))
+			// 	}
+			// 	rootLogger.Info("BTC notifier shutdown")
+			// })
+			// addInterruptHandler(func() {
+			// 	rootLogger.Info("Stopping Babylon client...")
+			// 	if err := bbnClient.Stop(); err != nil {
+			// 		panic(fmt.Errorf("failed to stop Babylon client: %w", err))
+			// 	}
+			// 	rootLogger.Info("Babylon client shutdown")
+			// })
 
-			<-interruptHandlersDone
-			rootLogger.Info("Shutdown complete")
+			// <-interruptHandlersDone
+			// rootLogger.Info("Shutdown complete")
 		},
 	}
 	cmd.Flags().StringVar(&babylonKeyDir, "babylon-key", "", "Directory of the Babylon key")

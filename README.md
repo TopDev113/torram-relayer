@@ -62,10 +62,6 @@ a GRPC instance running in port `9090`.
 Create a directory that will store the Bitcoin configuration.
 This will be later used to retrieve the certificate required for RPC connections.
 
-```shell
-mkdir $TESTNET_PATH/bitcoin
-```
-
 ```bash
 # Download Bitcoin Core binary
 wget https://bitcoincore.org/bin/bitcoin-core-27.0/bitcoin-27.0-x86_64-linux-gnu.tar.gz # or choose a version depending on your os
@@ -83,14 +79,7 @@ chmod +x bitcoin-27.0/bin/bitcoin-cli
 Launch a regtest Bitcoind node which listens for RPC connections at port `18443`.
 
 ```shell
-bitcoind -regtest \
-         -txindex \
-         -rpcuser=<rpc_user> \
-         -rpcpassword=<rpc_password> \
-         -rpcbind=0.0.0.0:18443 \
-         -zmqpubsequence=tcp://0.0.0.0:28333 \
-         -datadir=/data/.bitcoin \
-         
+make bitcoin-start
 ```
 
 Leave this process running.
@@ -100,22 +89,13 @@ If you want to use the default vigilante file, then give the password `walletpas
 Otherwise, make sure to edit the `vigilante.yaml` to reflect the correct password.
 
 ```shell
-bitcoin-cli -regtest \
-    -rpcuser=<rpc_user> \
-    -rpcpassword=<rpc_password> \
-    -named createwallet \
-    wallet_name="<wallet_name>" \
-    passphrase="<passphrase>" \
-    load_on_startup=true \
-    descriptors=true
+make wallet-start
 ```
+
 You can generate a btc address through the `getnewaddress` command:
 
 ```bash
-bitcoin-cli -regtest \
-    -rpcuser=<rpc_user> \
-    -rpcpassword=<rpc_password> \
-    getnewaddress
+make btc-create
 ```
 
 #### Generating BTC blocks
@@ -125,10 +105,7 @@ We accomplish that through the `bitcoin-cli` utility and the use
 of the parameters we defined above.
 
 ```shell
-bitcoin-cli -chain=regtest \
-      -rpcuser=<rpc_user> \
-      -rpcpassword=<rpc_password> \
-      -generate $NUM_BLOCKS
+make blocks-create
 ```
 
 where `$NUM_BLOCKS` is the number of blocks you want to generate.
@@ -148,32 +125,18 @@ a script.
 For Docker deployments, we have created the `sample-vigilante-docker.yaml`
 file which contains a configuration that will work out of this box for this guide.
 
-```shell
-mkdir $TESTNET_PATH/vigilante
-```
-
 ### Running the vigilante locally
 
 #### Running the vigilante reporter
 
-Initially, copy the sample configuration
-
 ```shell
-cp sample-vigilante.yml $TESTNET_PATH/vigilante/vigilante.yml
-nano $TESTNET_PATH/vigilante/vigilante.yml # edit the config file to replace $TESTNET instances
-```
-
-```shell
-go run $VIGILANTE_PATH/cmd/main.go reporter \
-         --config $TESTNET_PATH/vigilante/vigilante.yml \
-         --babylon-key-dir $BABYLON_PATH/.testnet/node0/babylond
+make vigilante-reporter
 ```
 
 #### Running the vigilante submitter
 
 ```shell
-go run $VIGILANTE_PATH/cmd/main.go submitter \
-         --config $TESTNET_PATH/vigilante/vigilante.yml
+make vigilante-submitter
 ```
 
 #### Running the vigilante monitor
@@ -183,9 +146,7 @@ We first need to ensure that a BTC full node and the Babylon node that we want t
 Then we start the vigilante monitor:
 
 ```shell
-go run $VIGILANTE_PATH/cmd/main.go monitor \
-         --genesis $BABYLON_NODE_PATH/config/genesis.json
-         --config $TESTNET_PATH/vigilante/vigilante.yml
+make vigilante-monitor
 ```
 
 #### Running the BTC staking tracker
@@ -195,8 +156,7 @@ We first need to ensure that a BTC full node and the Babylon node that we want t
 Then we start the BTC staking tracker:
 
 ```shell
-go run $VIGILANTE_PATH/cmd/main.go bstracker \
-         --config $TESTNET_PATH/vigilante/vigilante.yml
+make vigilante-tracker
 ```
 
 ### Running the vigilante using Docker
